@@ -1,9 +1,25 @@
+import type { CSSProperties, PointerEvent } from 'react'
 import { Sparkles } from 'lucide-react'
 import { site } from '../../site/content'
 import { Reveal } from './Reveal'
 
 export function SideProject() {
   const p = site.sideProject
+
+  const updateCardGlow = (event: PointerEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    const x = ((event.clientX - rect.left) / rect.width) * 100
+    const y = ((event.clientY - rect.top) / rect.height) * 100
+
+    event.currentTarget.style.setProperty('--glow-x', `${x}%`)
+    event.currentTarget.style.setProperty('--glow-y', `${y}%`)
+    event.currentTarget.style.setProperty('--glow-opacity', '1')
+  }
+
+  const resetCardGlow = (event: PointerEvent<HTMLElement>) => {
+    event.currentTarget.style.setProperty('--glow-opacity', '0')
+  }
+
   return (
     <section
       id="project"
@@ -13,8 +29,28 @@ export function SideProject() {
         <h2 className="font-display text-2xl font-semibold tracking-tight text-(--foreground) sm:text-3xl">
           Side project
         </h2>
-        <article className="mt-8 overflow-hidden rounded-2xl border border-(--border) bg-linear-to-br from-(--card) via-(--card) to-(--muted) bg-size-[200%_200%] p-4 shadow-(--shadow-card) transition-[box-shadow,background-position] duration-500 ease-out hover:bg-position-[100%_100%] hover:shadow-(--shadow-card-hover) sm:p-6 lg:p-8">
-          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-start sm:gap-6 sm:text-left">
+        <article
+          className="group relative isolate mt-8 overflow-hidden rounded-2xl border border-(--border) bg-linear-to-br from-(--card) via-(--card) to-(--muted) bg-size-[200%_200%] p-4 shadow-(--shadow-card) transition-[box-shadow,background-position,border-color] duration-500 ease-out hover:border-(--accent)/20 hover:shadow-(--shadow-card-hover) sm:p-6 lg:p-8"
+          style={
+            {
+              '--glow-x': '50%',
+              '--glow-y': '50%',
+              '--glow-opacity': '0',
+            } as CSSProperties
+          }
+          onPointerMove={updateCardGlow}
+          onPointerLeave={resetCardGlow}
+        >
+          <div
+            className="pointer-events-none absolute inset-[-18%] blur-3xl transition-opacity duration-500 ease-out"
+            aria-hidden
+            style={{
+              opacity: 'var(--glow-opacity)',
+              background:
+                'radial-gradient(circle at var(--glow-x) var(--glow-y), rgb(17 94 89 / 0.09), transparent 22%), radial-gradient(circle at var(--glow-x) var(--glow-y), rgb(94 234 212 / 0.08), transparent 42%)',
+            }}
+          />
+          <div className="relative z-10 flex flex-col items-center gap-4 text-center sm:flex-row sm:items-start sm:gap-6 sm:text-left">
             <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-(--accent)/15 text-(--accent)">
               <Sparkles className="size-6" strokeWidth={1.75} aria-hidden />
             </span>
