@@ -1,0 +1,220 @@
+@import 'tailwindcss';
+
+:root {
+  color-scheme: light;
+  --background: #f6f4f1;
+  --foreground: #1c1917;
+  --card: #fdfcfa;
+  --muted: #ebe8e4;
+  --muted-foreground: #57534e;
+  --border: #e7e2dc;
+  --accent: #115e59;
+  --accent-foreground: #ecfdf5;
+  --ring: #115e59;
+  --shadow-card:
+    0 1px 2px rgb(28 25 23 / 0.04), 0 4px 12px rgb(28 25 23 / 0.06);
+  --shadow-card-hover:
+    0 2px 4px rgb(28 25 23 / 0.06), 0 12px 28px rgb(28 25 23 / 0.08);
+
+  --font-sans: 'Work Sans', system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background: #141210;
+    --foreground: #e7e5e4;
+    --card: #1c1917;
+    --muted: #292524;
+    --muted-foreground: #a8a29e;
+    --border: #3f3d3a;
+    --accent: #5eead4;
+    --accent-foreground: #042f2e;
+    --ring: #5eead4;
+    --shadow-card:
+      0 1px 2px rgb(0 0 0 / 0.35), 0 4px 16px rgb(0 0 0 / 0.25);
+    --shadow-card-hover:
+      0 2px 6px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.3);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    min-height: 100dvh;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    background: var(--background);
+    color: var(--foreground);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  /**
+   * Horizontal padding that respects notches / home indicators (iOS, etc.).
+   * Matches previous 1rem / 1.5rem (sm) rhythm.
+   */
+  .section-x {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  @media (min-width: 640px) {
+    .section-x {
+      padding-left: max(1.5rem, env(safe-area-inset-left));
+      padding-right: max(1.5rem, env(safe-area-inset-right));
+    }
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/* ── Motion: hero + scroll reveals (see Reveal.tsx) ── */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes reveal-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes header-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes accent-shimmer {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-hero {
+  opacity: 0;
+  animation: reveal-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-hero-delay-1 {
+  animation-delay: 70ms;
+}
+.animate-hero-delay-2 {
+  animation-delay: 140ms;
+}
+.animate-hero-delay-3 {
+  animation-delay: 210ms;
+}
+.animate-hero-delay-4 {
+  animation-delay: 280ms;
+}
+.animate-hero-delay-5 {
+  animation-delay: 350ms;
+}
+.animate-hero-delay-6 {
+  animation-delay: 420ms;
+}
+.animate-hero-delay-7 {
+  animation-delay: 490ms;
+}
+
+.animate-avatar {
+  opacity: 0;
+  animation: reveal-scale-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-header {
+  animation: header-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal-scroll {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-scroll--visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.accent-line {
+  display: inline-block;
+  transform-origin: left center;
+  animation: accent-shimmer 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero,
+  .animate-avatar {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .animate-header {
+    animation: none !important;
+  }
+
+  .reveal-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .accent-line {
+    animation: none;
+  }
+}
