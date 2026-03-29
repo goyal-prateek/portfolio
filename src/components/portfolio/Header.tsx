@@ -8,6 +8,7 @@ const nav = [
   { href: '#skills', label: 'Skills' },
   { href: '#education', label: 'Education' },
   { href: '#project', label: 'Side project' },
+  { href: '#toy-projects', label: 'Toy projects' },
   { href: '#profiles', label: 'Profiles' },
 ] as const
 

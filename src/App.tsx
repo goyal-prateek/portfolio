@@ -7,6 +7,7 @@ import { Hero } from './components/portfolio/Hero'
 import { Profiles } from './components/portfolio/Profiles'
 import { SideProject } from './components/portfolio/SideProject'
 import { Skills } from './components/portfolio/Skills'
+import { ToyProjects } from './components/portfolio/ToyProjects'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Skills />
         <Education />
         <SideProject />
+        <ToyProjects />
         <Profiles />
         <Footer />
       </main>
