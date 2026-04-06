@@ -1,16 +1,20 @@
-import { Building2 } from 'lucide-react'
-import { site } from '../../site/content'
-import { Reveal } from './Reveal'
+import { Building2 } from "lucide-react";
+import { site } from "../../site/content";
+import { Reveal } from "./Reveal";
+import { MovingBorderComponent } from "../ui/moving-border";
+import { cn } from "@/lib/utils";
 
 export function Experience() {
+  const experienceCardClassName =
+    "flex h-auto min-h-0 w-full flex-col items-stretch justify-start overflow-hidden border border-border bg-card p-4 text-left text-foreground antialiased shadow-shadow-card transition-shadow duration-200 ease-out hover:shadow-shadow-card-hover sm:p-6 lg:p-8";
   return (
     <section
       id="experience"
-      className="scroll-mt-24 border-b border-(--border) section-x py-12 sm:py-16"
+      className="scroll-mt-24 border-b border-border section-x py-12 sm:py-16"
     >
       <div className="mx-auto max-w-3xl lg:max-w-4xl">
         <Reveal>
-          <h2 className="font-display text-2xl font-semibold tracking-tight text-(--foreground) sm:text-3xl">
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
             Experience
           </h2>
         </Reveal>
@@ -18,41 +22,65 @@ export function Experience() {
           {site.experience.map((job, i) => (
             <li key={`${job.title}-${job.range}`}>
               <Reveal delayMs={i * 72}>
-                <article className="overflow-hidden rounded-2xl border border-(--border) bg-(--card) p-4 shadow-(--shadow-card) transition-shadow duration-200 ease-out hover:shadow-(--shadow-card-hover) sm:p-6 lg:p-8">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                    <div className="flex min-w-0 gap-3">
-                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-(--muted) text-(--accent)">
-                        <Building2 className="size-5" strokeWidth={1.75} aria-hidden />
-                      </span>
-                      <div className="min-w-0">
-                        <h3 className="font-display text-lg font-semibold text-(--foreground) sm:text-xl">
-                          {job.company}
-                        </h3>
-                        <p className="text-pretty text-sm text-(--muted-foreground)">
-                          {job.title} · {job.location}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="shrink-0 text-sm font-medium tabular-nums text-(--muted-foreground) sm:pt-1 sm:text-right">
-                      {job.range}
-                    </p>
-                  </div>
-                  <ul className="mt-6 list-none space-y-3 pl-0">
-                    {job.highlights.map((item) => (
-                      <li
-                        key={item}
-                        className="relative wrap-break-word pl-5 text-pretty text-sm leading-relaxed text-(--muted-foreground) before:absolute before:left-0 before:top-2.5 before:size-1.5 before:rounded-full before:bg-(--accent)"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
+                {i === 0 ? (
+                  <MovingBorderComponent
+                    borderRadius="2rem"
+                    containerClassName="relative w-full h-auto overflow-hidden bg-transparent p-px text-base"
+                    borderClassName="h-24 w-24 bg-[radial-gradient(var(--accent)_40%,transparent_60%)] opacity-[0.9]"
+                    className={experienceCardClassName}
+                    duration={5000}
+                  >
+                    <ExperienceCard job={job} />
+                  </MovingBorderComponent>
+                ) : (
+                  <article
+                    className={cn(experienceCardClassName, "rounded-2xl")}
+                  >
+                    <ExperienceCard job={job} />
+                  </article>
+                )}
               </Reveal>
             </li>
           ))}
         </ul>
       </div>
     </section>
-  )
+  );
 }
+
+const ExperienceCard = ({
+  job,
+}: {
+  job: (typeof site.experience)[number];
+}) => (
+  <>
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+      <div className="flex min-w-0 gap-3">
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-muted text-accent">
+          <Building2 className="size-5" strokeWidth={1.75} aria-hidden />
+        </span>
+        <div className="min-w-0">
+          <h3 className="font-display text-lg font-semibold text-foreground sm:text-xl">
+            {job.company}
+          </h3>
+          <p className="text-pretty text-sm text-muted-foreground">
+            {job.title} · {job.location}
+          </p>
+        </div>
+      </div>
+      <p className="shrink-0 text-sm font-medium tabular-nums text-muted-foreground sm:pt-1 sm:text-right">
+        {job.range}
+      </p>
+    </div>
+    <ul className="mt-6 list-none space-y-3 pl-0">
+      {job.highlights.map((item) => (
+        <li
+          key={item}
+          className="relative wrap-break-word pl-5 text-pretty text-sm leading-relaxed text-muted-foreground before:absolute before:left-0 before:top-2.5 before:size-1.5 before:rounded-full before:bg-accent"
+        >
+          {item}
+        </li>
+      ))}
+    </ul>
+  </>
+);
