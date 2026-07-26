@@ -39,3 +39,14 @@ This repo uses Husky and lint-staged to run ESLint on staged `*.ts` and `*.tsx` 
 ## Repository
 
 GitHub: [goyal-prateek/portfolio](https://github.com/goyal-prateek/portfolio)
+
+## Deployment
+
+The production site is a static Vite build hosted in the private
+`portfolio-390445022785-ap-south-1` S3 bucket and served through CloudFront.
+`https://prateeklab.com` is canonical; `https://www.prateeklab.com` permanently
+redirects to the matching apex URL.
+
+Pull requests run lint and a production build. A successful push to `main`
+uploads that exact build artifact through GitHub OIDC, applies immutable cache
+headers to hashed assets, and waits for the CloudFront invalidation to finish.
