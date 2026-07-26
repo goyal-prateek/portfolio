@@ -1,5 +1,7 @@
 type ThreeIslands = typeof import('./three-islands')
 
+const AVATAR_LOAD_DELAY_MS = 2500
+
 const initializedMenus = new WeakSet<Element>()
 const initializedPointerCards = new WeakSet<Element>()
 const initializedAvatarRoots = new WeakSet<Element>()
@@ -103,28 +105,23 @@ function initializeAvatar3d() {
     initializedAvatarRoots.add(root)
 
     let started = false
-    let fallbackTimer = 0
+    let loadTimer = 0
 
     const start = () => {
       if (started) return
       started = true
-      window.clearTimeout(fallbackTimer)
+      window.clearTimeout(loadTimer)
       loadThreeIslands().then(({ mountAvatar3d }) => mountAvatar3d(root))
     }
 
-    const interactionEvents = ['pointermove', 'touchstart', 'keydown'] as const
-    interactionEvents.forEach((eventName) => {
-      window.addEventListener(eventName, start, { once: true, passive: true })
-    })
-
-    const scheduleFallback = () => {
-      fallbackTimer = window.setTimeout(start, 5000)
+    const scheduleLoad = () => {
+      loadTimer = window.setTimeout(start, AVATAR_LOAD_DELAY_MS)
     }
 
     if (document.readyState === 'complete') {
-      scheduleFallback()
+      scheduleLoad()
     } else {
-      window.addEventListener('load', scheduleFallback, { once: true })
+      window.addEventListener('load', scheduleLoad, { once: true })
     }
   })
 }
