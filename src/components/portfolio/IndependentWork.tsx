@@ -22,15 +22,12 @@ export function IndependentWork() {
         </p>
 
         <article
-          className="group relative isolate mt-8 overflow-hidden rounded-2xl border border-(--border) bg-linear-to-br from-(--card) via-(--card) to-(--muted) p-4 shadow-(--shadow-card) transition-[box-shadow,border-color] duration-300 ease-out hover:border-(--accent)/30 hover:shadow-(--shadow-card-hover) sm:p-6 lg:p-8"
+          className="debrix-pointer-card group relative isolate mt-8 overflow-hidden rounded-2xl border border-(--border) bg-linear-to-br from-(--card) via-(--card) to-(--muted) p-4 shadow-(--shadow-card) transition-[box-shadow,border-color] duration-300 ease-out hover:border-(--accent)/30 hover:shadow-(--shadow-card-hover) sm:p-6 lg:p-8"
+          data-pointer-glow
         >
           <div
-            className="pointer-events-none absolute inset-[-18%] opacity-70 blur-3xl"
+            className="debrix-pointer-glow pointer-events-none absolute inset-[-18%] blur-3xl"
             aria-hidden
-            style={{
-              background:
-                'radial-gradient(circle at 82% 18%, rgb(47 134 214 / 0.12), transparent 24%), radial-gradient(circle at 18% 82%, rgb(31 169 113 / 0.08), transparent 42%)',
-            }}
           />
 
           <div className="relative z-10">

@@ -1,13 +1,14 @@
-/** Lightweight decorative system map with no runtime animation or canvas work. */
+/** Static first-paint fallback; the moving 3D scene is mounted as a deferred island. */
 export function SkillsMiniScene({ className = '' }: { className?: string }) {
   return (
     <div
       className={`pointer-events-none relative h-28 w-full select-none text-(--accent) sm:h-32 ${className}`}
       aria-hidden
+      data-skills-3d-root
     >
       <svg
         viewBox="0 0 360 180"
-        className="size-full"
+        className="skills-static-fallback size-full"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
