@@ -6,6 +6,7 @@ export function Avatar({ className = '' }: { className?: string }) {
       className={`relative isolate size-32 overflow-hidden rounded-2xl bg-(--muted) shadow-(--shadow-card) ring-1 ring-(--border) sm:size-36 md:size-40 ${className}`}
       role="img"
       aria-label={`${site.name} profile illustration`}
+      data-avatar-3d-root
     >
       <img
         src="/avatar-static.jpg"
@@ -14,7 +15,7 @@ export function Avatar({ className = '' }: { className?: string }) {
         height="160"
         decoding="async"
         fetchPriority="high"
-        className="size-full object-cover"
+        className="avatar-static-fallback size-full object-cover"
       />
     </div>
   )

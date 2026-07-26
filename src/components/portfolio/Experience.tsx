@@ -1,7 +1,6 @@
 import { Building2 } from "lucide-react";
 import { site } from "../../site/content";
 import { Reveal } from "./Reveal";
-import { MovingBorderComponent } from "../ui/moving-border";
 import { cn } from "@/lib/utils";
 
 export function Experience() {
@@ -23,15 +22,16 @@ export function Experience() {
             <li key={`${job.title}-${job.range}`}>
               <Reveal delayMs={i * 72}>
                 {i === 0 ? (
-                  <MovingBorderComponent
-                    borderRadius="2rem"
-                    containerClassName="relative w-full h-auto overflow-hidden bg-transparent p-px text-base"
-                    borderClassName="h-24 w-24 bg-[radial-gradient(var(--accent)_40%,transparent_60%)] opacity-[0.9]"
-                    className={experienceCardClassName}
-                    duration={5000}
-                  >
-                    <ExperienceCard job={job} />
-                  </MovingBorderComponent>
+                  <div className="experience-border-shell">
+                    <article
+                      className={cn(
+                        experienceCardClassName,
+                        "relative rounded-[calc(2rem-1px)]",
+                      )}
+                    >
+                      <ExperienceCard job={job} />
+                    </article>
+                  </div>
                 ) : (
                   <article
                     className={cn(experienceCardClassName, "rounded-2xl")}
