@@ -10,7 +10,6 @@ export const site = {
   links: {
     github: "https://github.com/goyal-prateek",
     linkedin: "https://www.linkedin.com/in/goyal-prateek",
-    resumer: "https://resumer.prateeklab.com/",
   },
   about: [
     "I am especially interested in AI systems and scaling them responsibly — not just calling a model, but designing workflows that degrade gracefully, stay within budget, and stay debuggable when things go wrong in the wild.",
@@ -91,9 +90,15 @@ export const site = {
     range: "Nov 2020 – Jun 2024",
     detail: "CGPA 8.43 / 10",
   },
-  sideProject: {
-    title: "Something new is cooking",
-    body: "I am building a focused side project around tooling and UX. I will share more when it is ready for a public release.",
+  featuredProject: {
+    title: "Debrix",
+    tagline: "The interactive debugger for AI agents",
+    body: "Open a failed run. Hold the evidence constant. Test one change at a time. Then verify the real fix with no overrides and save it as a regression.",
+    href: "https://debrix.io",
+    logoSrc: "/projects/debrix-logo.svg",
+    status: "Controlled early access",
+    role: "Founder & builder",
+    principles: ["Local-first", "IDE-native", "Evidence-first"],
   },
   toyProjectsIntro:
     "Small, opinionated desktop experiments — the kind of software I build for fun, to learn a stack end-to-end, or to scratch a very specific itch.",

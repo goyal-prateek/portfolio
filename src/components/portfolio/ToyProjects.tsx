@@ -13,7 +13,7 @@ export function ToyProjects() {
       <div className="mx-auto max-w-3xl lg:max-w-4xl">
         <Reveal>
           <h2 className="font-display text-2xl font-semibold tracking-tight text-(--foreground) sm:text-3xl">
-            Toy projects
+            Small experiments
           </h2>
           <p className="mt-3 max-w-[min(100%,65ch)] text-pretty text-base leading-relaxed text-(--muted-foreground)">
             {toyProjectsIntro}

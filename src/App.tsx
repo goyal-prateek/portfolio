@@ -4,8 +4,8 @@ import { Experience } from './components/portfolio/Experience'
 import { Footer } from './components/portfolio/Footer'
 import { Header } from './components/portfolio/Header'
 import { Hero } from './components/portfolio/Hero'
+import { IndependentWork } from './components/portfolio/IndependentWork'
 import { Profiles } from './components/portfolio/Profiles'
-import { SideProject } from './components/portfolio/SideProject'
 import { Skills } from './components/portfolio/Skills'
 import { ToyProjects } from './components/portfolio/ToyProjects'
 
@@ -25,7 +25,7 @@ export default function App() {
         <Experience />
         <Skills />
         <Education />
-        <SideProject />
+        <IndependentWork />
         <ToyProjects />
         <Profiles />
         <Footer />
