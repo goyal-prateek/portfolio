@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+@import "@fontsource-variable/fraunces";
 /*---break---
    */
 @custom-variant dark (&:is(.dark *));
@@ -14,16 +15,16 @@
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --border: oklch(0.922 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --ring: oklch(0.708 0 0);
+  --accent: #0f766e;
+  --accent-foreground: #ffffff;
+  --ring: #0f766e;
   --shadow-card:
     0 1px 2px rgb(28 25 23 / 0.04), 0 4px 12px rgb(28 25 23 / 0.06);
   --shadow-card-hover:
     0 2px 4px rgb(28 25 23 / 0.06), 0 12px 28px rgb(28 25 23 / 0.08);
 
   --font-sans: 'Work Sans', system-ui, sans-serif;
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
   --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -131,40 +132,6 @@
   }
 }
 
-/* ── Motion: hero + scroll reveals (see Reveal.tsx) ── */
-@keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 14px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes reveal-scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes header-enter {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -10px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 @keyframes accent-shimmer {
   0%,
   100% {
@@ -173,42 +140,6 @@
   50% {
     opacity: 1;
   }
-}
-
-.animate-hero {
-  opacity: 0;
-  animation: reveal-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.animate-hero-delay-1 {
-  animation-delay: 70ms;
-}
-.animate-hero-delay-2 {
-  animation-delay: 140ms;
-}
-.animate-hero-delay-3 {
-  animation-delay: 210ms;
-}
-.animate-hero-delay-4 {
-  animation-delay: 280ms;
-}
-.animate-hero-delay-5 {
-  animation-delay: 350ms;
-}
-.animate-hero-delay-6 {
-  animation-delay: 420ms;
-}
-.animate-hero-delay-7 {
-  animation-delay: 490ms;
-}
-
-.animate-avatar {
-  opacity: 0;
-  animation: reveal-scale-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.animate-header {
-  animation: header-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .reveal-scroll {
@@ -231,17 +162,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-hero,
-  .animate-avatar {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .animate-header {
-    animation: none !important;
-  }
-
   .reveal-scroll {
     opacity: 1;
     transform: none;
